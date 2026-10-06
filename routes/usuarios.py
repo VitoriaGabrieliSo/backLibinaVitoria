@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 
-from database import get_connection
+from database import inicia_conexao
 from models.filmes import Filmes
 from models.usuarios import Usuarios
 
@@ -15,7 +15,7 @@ def busca_usuarios():
     if nome == '':
         return { 'erro': 'Informe o parâmetro nome' }, 400
 
-    cursor = get_connection().cursor()
+    cursor = inicia_conexao().cursor()
     usuarios = Usuarios(cursor).search(nome)
 
     filmes = Filmes(cursor)

@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for
 
-from database import close_connection
+from database import fecha_conexao
 from routes.filmes import filmes_bp
 from routes.usuarios import usuarios_bp
 
@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.url_map.strict_slashes = False
 app.json.ensure_ascii = False
 app.json.sort_keys = False
-app.teardown_appcontext(close_connection)
+app.teardown_appcontext(fecha_conexao)
 
 # Indica onde fica a rota lógica e quando ela é acessada (prefix)
 

@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 
-from database import get_connection
+from database import inicia_conexao
 from models.filmes import Filmes
 
 
@@ -14,5 +14,5 @@ def busca_filmes():
     if titulo == '':
         return { 'erro': 'Informe o parâmetro titulo' }, 400
 
-    model = Filmes(get_connection().cursor())
+    model = Filmes(inicia_conexao().cursor())
     return { 'filmes': model.search(titulo) }
