@@ -6,7 +6,7 @@ class Usuarios:
 
 
     # usuarios cujo nome contem o termo buscado
-    def search(self, nome):
+    def pesquisar(self, nome):
         self._cursor.execute(
             'SELECT id, nome FROM usuarios WHERE nome LIKE %s ORDER BY nome',
             ('%' + nome + '%',))
