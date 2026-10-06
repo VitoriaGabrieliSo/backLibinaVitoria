@@ -1,0 +1,39 @@
+services:
+
+  db:
+    image: mysql:8.4
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: api_filmes
+      MYSQL_USER: api
+      MYSQL_PASSWORD: api123
+    ports:
+      - "3307:3306"
+    volumes:
+      # os .sql desta pasta rodam (em ordem alfabetica) so na 1a vez que o banco e criado
+      - ./db:/docker-entrypoint-initdb.d
+      - dbdata:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-proot123"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: api
+      DB_PASSWORD: api123
+      DB_NAME: api_filmes
+    volumes:
+      - .:/app
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  dbdata:
