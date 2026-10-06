@@ -3,8 +3,10 @@ import os
 import mysql.connector
 from flask import g
 
+# gerencia a conexão com o banco de dados para acesso pelo models
+# pega as informações fornecidas no arquivo .env
 
-def get_connection():
+def inicia_conexao():
     if 'db' not in g:
         g.db = mysql.connector.connect(
             host=os.environ.get('DB_HOST', 'localhost'),
@@ -17,7 +19,7 @@ def get_connection():
     return g.db
 
 
-def close_connection(exception=None):
+def fecha_conexao(exception=None):
     db = g.pop('db', None)
     if db is not None:
         db.close()

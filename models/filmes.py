@@ -6,7 +6,7 @@ class Filmes:
 
 
     # filmes cujo titulo contem o termo buscado
-    def search(self, titulo):
+    def pesquisar(self, titulo):
         self._cursor.execute('''
             SELECT f.id, f.titulo, f.ano, f.duracao, f.classificacao, f.sinopse, f.poster,
                    GROUP_CONCAT(g.nome ORDER BY g.nome SEPARATOR ', ')
