@@ -16,7 +16,7 @@ def busca_usuarios():
         return { 'erro': 'Informe o parâmetro nome' }, 400
 
     cursor = inicia_conexao().cursor()
-    usuarios = Usuarios(cursor).search(nome)
+    usuarios = Usuarios(cursor).pesquisar(nome)
 
     filmes = Filmes(cursor)
     for usuario in usuarios:

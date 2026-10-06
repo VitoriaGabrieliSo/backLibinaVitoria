@@ -15,4 +15,4 @@ def busca_filmes():
         return { 'erro': 'Informe o parâmetro titulo' }, 400
 
     model = Filmes(inicia_conexao().cursor())
-    return { 'filmes': model.search(titulo) }
+    return { 'filmes': model.pesquisar(titulo) }
